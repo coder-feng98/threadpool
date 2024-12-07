@@ -1,16 +1,18 @@
 #ifndef THREADPOOL_H
 #define THREADPOOL_H
 
-struct ThreadPool;
+typedef struct ThreadPool ThreadPool;
 
 // 初始化线程池
 ThreadPool* initThreadPool(int tMin, int tMax, int tCapacity);
 
-// 销毁线程池
+// 工作线程入口函数
+void* workerFunc(void* arg); 
 
-// 启动线程池
+// 管理线程入口函数
+void* managerFunc(void* arg);
 
 // 添加任务
-
+int addTask(ThreadPool* pool, void (*func)(void*), void* arg);
 
 #endif
